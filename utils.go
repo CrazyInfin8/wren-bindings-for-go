@@ -1,6 +1,8 @@
 package wren
 
 /*
+#cgo CFLAGS:
+#cgo LDFLAGS: -lm
 #include "wren.h"
 
 extern char* resolveModuleFn(WrenVM*, char*, char*);
