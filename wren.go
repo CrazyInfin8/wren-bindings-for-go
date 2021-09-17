@@ -99,7 +99,7 @@ const (
 	ValueTypeBool    ValueType = C.WREN_TYPE_BOOL
 	ValueTypeNum     ValueType = C.WREN_TYPE_NUM
 	ValueTypeForeign ValueType = C.WREN_TYPE_FOREIGN
-	ValueTypeList    ValueType = C.WREN_TYPE_MAP
+	ValueTypeList    ValueType = C.WREN_TYPE_LIST
 	ValueTypeMap     ValueType = C.WREN_TYPE_MAP
 	ValueTypeNull    ValueType = C.WREN_TYPE_NULL
 	ValueTypeString  ValueType = C.WREN_TYPE_STRING

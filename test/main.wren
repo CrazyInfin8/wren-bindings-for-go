@@ -22,3 +22,11 @@ var fn = Fn.new {|data|
     System.print("Hello world!")
     System.print("Data passed in is: " + data)
 }
+
+foreign class Foreign {
+    construct new() {
+        System.print("Foreign construct called from wren")
+    }
+}
+
+Foreign.new()

@@ -23,6 +23,8 @@ var modExtras string
 //go:embed test/os.wren
 var modOS string
 
+var t *testing.T
+
 var srcMap = map[string]string{
 	"extras": modExtras,
 	"os":     modOS,
@@ -72,15 +74,26 @@ var classMap = map[classKey]wren.ForeignClassMethods{
 		},
 		Finalize: func(userdata interface{}) {
 			if userdata.(*os.File).Close() != nil {
-				println("Error closing file")
+				t.Logf("Error closing file")
 				return
 			}
-			println("File closed successfully")
+			t.Logf("File closed successfully")
+		},
+	},
+	{"main.wren", "Foreign"}: {
+		Allocate: func(vm *wren.VM) {
+			t := vm.UserData.(*testing.T)
+			t.Logf("Foreign function called from Go")
+			vm.SetForeign(0, 0, nil)
+		},
+		Finalize: func(userdata interface{}) {
+			t.Logf("clearing data from class Foreign ")
 		},
 	},
 }
 
-func TestWren(t *testing.T) {
+func TestWren(ttemp *testing.T) {
+	t = ttemp
 	vm := wren.Config{
 		ResolveModuleFn:     resolveModuleFn,
 		LoadModuleFn:        loadModuleFn,
